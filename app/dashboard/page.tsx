@@ -1,14 +1,13 @@
 import { Box, Button, Typography } from '@mui/material';
-
-export default function Home() {
+export default function Teste() {
     return (
         <Box>
-            <Typography variant="h1">Home</Typography>
+            <Typography variant="h1">Dashboard</Typography>
             <Button
                 variant="contained"
-                href="/dashboard"
+                href="/"
             >
-                Dashboard
+                Back to Home
             </Button>
         </Box>
     );
