@@ -5,7 +5,7 @@
 ## Summary
 
 -   [Getting Started](#getting-started)
--   [Leanr More](#learn-more)
+-   [Learn More](#learn-more)
 
 ## Getting Started
 
