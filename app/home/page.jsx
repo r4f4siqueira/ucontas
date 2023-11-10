@@ -1,16 +1,17 @@
 import { Box, Button, Container, Typography } from '@mui/material';
 import ResponsiveAppBar from '../components/ResponsiveAppBar';
-export default function Teste() {
+
+export default function WelcomePage() {
     return (
         <Box>
-            <ResponsiveAppBar avatarUrl={''} />
+            <ResponsiveAppBar links={['Lear More', 'Description', 'Docs']} />
             <Container maxWidth="xl">
-                <Typography variant="h1">Dashboard</Typography>
+                <Typography variant="h1">Home</Typography>
                 <Button
                     variant="contained"
-                    href="/"
+                    href="/dashboard"
                 >
-                    Back to Home
+                    Login
                 </Button>
             </Container>
         </Box>

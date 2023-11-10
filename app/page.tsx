@@ -1,15 +1,10 @@
-import { Box, Button, Typography } from '@mui/material';
+import { Box } from '@mui/material';
+import WelcomePage from './home/page';
 
 export default function Home() {
     return (
         <Box>
-            <Typography variant="h1">Home</Typography>
-            <Button
-                variant="contained"
-                href="/dashboard"
-            >
-                Dashboard
-            </Button>
+            <WelcomePage />
         </Box>
     );
 }

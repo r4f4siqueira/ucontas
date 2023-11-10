@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-
-const inter = Inter({ subsets: ['latin'] });
+import ResponsiveAppBar from './components/ResponsiveAppBar';
+import { CssBaseline, ThemeProvider } from '@mui/material';
+import { THEME } from './shared/constants/theme';
 
 export const metadata: Metadata = {
     title: 'UContas',
@@ -11,7 +11,10 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
     return (
         <html lang="en">
-            <body className={inter.className}>{children}</body>
+            <ThemeProvider theme={THEME}>
+                <CssBaseline />
+                <body>{children}</body>
+            </ThemeProvider>
         </html>
     );
 }
