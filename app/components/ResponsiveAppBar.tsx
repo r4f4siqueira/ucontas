@@ -11,6 +11,7 @@ import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
+import AdbIcon from '@mui/icons-material/Adb';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -47,9 +48,9 @@ export default function ResponsiveAppBar(props: { avatarUrl?: string; links?: st
 
     return (
         <AppBar position="static">
-            <Container maxWidth="xl">
+            <Container>
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
                     <Typography
                         variant="h6"
                         noWrap
@@ -107,7 +108,7 @@ export default function ResponsiveAppBar(props: { avatarUrl?: string; links?: st
                             ))}
                         </Menu>
                     </Box>
-                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
                     <Typography
                         variant="h5"
                         noWrap
@@ -137,7 +138,7 @@ export default function ResponsiveAppBar(props: { avatarUrl?: string; links?: st
                             </Button>
                         ))}
                     </Box>
-
+                    {/* {auth && ()} */}
                     {avatar != undefined ? (
                         <Box sx={{ flexGrow: 0 }}>
                             <Tooltip title="Open settings">

@@ -7,7 +7,8 @@ export default function Teste() {
             <Container maxWidth="xl">
                 <Typography variant="h1">Dashboard</Typography>
                 <Button
-                    variant="contained"
+                    variant="outlined"
+                    color="success"
                     href="/"
                 >
                     Back to Home

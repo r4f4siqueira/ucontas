@@ -8,7 +8,8 @@ export default function WelcomePage() {
             <Container maxWidth="xl">
                 <Typography variant="h1">Home</Typography>
                 <Button
-                    variant="contained"
+                    variant="outlined"
+                    color="success"
                     href="/dashboard"
                 >
                     Login
