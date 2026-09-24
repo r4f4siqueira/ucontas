@@ -8,6 +8,8 @@ import { Suspense } from "react";
 import { AuthButton } from "@/components/auth-button";
 import { HomeButton } from "@/components/home-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { LanguageSwitcher } from "@/components/language-switcher";
+import { LanguageProvider } from "@/lib/i18n/context";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -34,7 +36,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body className={`${geistSans.className} antialiased`}>
         <ThemeProvider
           attribute="class"
@@ -42,24 +44,27 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <main className="min-h-screen flex flex-col items-center">
-            <div className="flex-1 w-full flex flex-col items-center ">
-              <nav className="w-full flex justify-between border-b border-b-foreground/10 h-16 items-center">
-                <HomeButton />
-                <div className="w-full max-w-5xl flex justify-end p-0 px-0 md:p-3 md:px-5 text-sm gap-2">
-                  {!hasEnvVars ? (
-                    <EnvVarWarning />
-                  ) : (
-                    <Suspense>
-                      <AuthButton />
-                    </Suspense>
-                  )}
-                  <ThemeSwitcher />
-                </div>
-              </nav>
-              <div className="w-full  p-5 ">{children}</div>
-            </div>
-          </main>
+          <LanguageProvider>
+            <main className="min-h-screen flex flex-col items-center">
+              <div className="flex-1 w-full flex flex-col items-center ">
+                <nav className="w-full flex justify-between border-b border-b-foreground/10 h-16 items-center">
+                  <HomeButton />
+                  <div className="w-full max-w-5xl flex justify-end p-0 px-0 md:p-3 md:px-5 text-sm gap-2">
+                    {!hasEnvVars ? (
+                      <EnvVarWarning />
+                    ) : (
+                      <Suspense>
+                        <AuthButton />
+                      </Suspense>
+                    )}
+                    <LanguageSwitcher />
+                    <ThemeSwitcher />
+                  </div>
+                </nav>
+                <div className="w-full  p-5 ">{children}</div>
+              </div>
+            </main>
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
