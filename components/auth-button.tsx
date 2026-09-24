@@ -41,7 +41,7 @@ export function AuthButton() {
 
   return user ? (
     <div className="flex items-center gap-4">
-      {text.nav.hey}, {user.email}!
+      {/* {text.nav.hey}, {user.email}! */}
       <LogoutButton />
     </div>
   ) : (

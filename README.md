@@ -9,8 +9,8 @@ Aplicativo de gerenciamento de finanças pessoais e empresariais desenvolvido co
 - [ ] Categorias de receitas e despesas
 - [ ] Gráficos de receitas e despesas
 - [x] Histórico de transações
-- [ ] Dashboard
-- [ ] Multi carteiras (Gerencie contas Pessoais e Empresariais)
+- [x] Dashboard
+- [x] Multi carteiras (Gerencie contas Pessoais e Empresariais)
 
 ## Clone e execute localmente
 

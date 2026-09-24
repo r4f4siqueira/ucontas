@@ -3,6 +3,7 @@ export type TransactionType = "income" | "expense";
 export interface Transaction {
   id: string;
   user_id: string;
+  wallet_id?: string | null;
   title: string;
   amount: number;
   type: TransactionType;
@@ -13,6 +14,7 @@ export interface Transaction {
 }
 
 export interface CreateTransactionDTO {
+  wallet_id: string;
   title: string;
   amount: number;
   type: TransactionType;

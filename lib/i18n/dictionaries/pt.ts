@@ -20,36 +20,42 @@ export const pt = {
   },
   home: {
     title: "Gerencie suas finanças de forma simples e inteligente",
-    subtitle: "O UContas ajuda você a organizar gastos, planejar seu futuro financeiro e ter total controle do seu dinheiro.",
+    subtitle:
+      "O UContas ajuda você a organizar gastos, planejar seu futuro financeiro e ter total controle do seu dinheiro.",
     getStarted: "Começar agora",
     learnMore: "Saiba mais",
     features: {
       title: "Recursos que simplificam sua rotina",
       expenses: "Controle de Despesas",
-      expensesDesc: "Acompanhe todas as suas contas a pagar e a receber com facilidade.",
+      expensesDesc:
+        "Acompanhe todas as suas contas a pagar e a receber com facilidade.",
       reports: "Relatórios Claros",
-      reportsDesc: "Visualize gráficos intuitivos sobre seus hábitos financeiros.",
+      reportsDesc:
+        "Visualize gráficos intuitivos sobre seus hábitos financeiros.",
       security: "Segurança de Ponta",
-      securityDesc: "Seus dados protegidos com criptografia e autenticação moderna.",
+      securityDesc:
+        "Seus dados protegidos com criptografia e autenticação moderna.",
     },
   },
   dashboard: {
     title: "Painel Principal",
     welcome: "Bem-vindo ao seu painel financeiro",
-    protectedMessage: "Esta é uma página do dashboard que você só pode ver como usuário autenticado",
+    protectedMessage:
+      "Esta é uma página do dashboard que você só pode ver como usuário autenticado",
     overview: "Visão Geral",
     totalBalance: "Saldo Total",
     income: "Receitas",
     expenses: "Despesas",
     recentTransactions: "Transações Recentes",
     noTransactions: "Nenhuma transação cadastrada ainda.",
-    noTransactionsDesc: "Adicione sua primeira receita ou despesa usando os botões acima.",
+    noTransactionsDesc:
+      "Adicione sua primeira receita ou despesa usando os botões acima.",
     newIncome: "Nova Receita",
     newExpense: "Nova Despesa",
-    addIncome: "Cadastrar Receita",
-    addExpense: "Adicionar Despesa",
-    modalIncomeTitle: "Cadastrar Receita",
-    modalExpenseTitle: "Adicionar Despesa",
+    addIncome: "Inserir Receita",
+    addExpense: "Inserir Despesa",
+    modalIncomeTitle: "Inserir Receita",
+    modalExpenseTitle: "Inserir Despesa",
     modalIncomeSubtitle: "Preencha os dados da receita recebida ou a receber.",
     modalExpenseSubtitle: "Preencha os dados da despesa ou conta a pagar.",
     typeLabel: "Tipo de Lançamento",
@@ -70,10 +76,36 @@ export const pt = {
     successExpense: "Despesa cadastrada com sucesso!",
     successDelete: "Transação excluída com sucesso!",
     errorFillRequired: "Por favor, preencha o título e um valor válido.",
-    errorSaving: "Erro ao salvar lançamento. Verifique se a tabela foi criada no Supabase.",
+    errorSaving:
+      "Erro ao salvar lançamento. Verifique se a tabela foi criada no Supabase.",
     errorDeleting: "Erro ao excluir transação.",
-    tableMissingWarning: "Tabela 'transactions' não encontrada no Supabase. Execute o script SQL para criá-la.",
+    tableMissingWarning:
+      "Tabela 'transactions' não encontrada no Supabase. Execute o script SQL para criá-la.",
     deleteConfirm: "Tem certeza que deseja excluir esta transação?",
+  },
+  wallets: {
+    title: "Carteiras",
+    myWallets: "Minhas Carteiras",
+    selectWallet: "Selecionar Carteira",
+    currentWallet: "Carteira Atual",
+    newWallet: "Nova Carteira",
+    createWallet: "Criar Carteira",
+    createFirstWallet: "Criar Minha Primeira Carteira",
+    noWalletsTitle: "Você ainda não possui nenhuma carteira",
+    noWalletsDesc:
+      "Crie sua primeira carteira (por exemplo: 'Pessoal' ou 'Empresa') para começar a gerenciar suas receitas e despesas de forma organizada.",
+    nameLabel: "Nome da Carteira",
+    namePlaceholder: "Ex: Pessoal, Empresa ABC, Investimentos...",
+    descriptionLabel: "Descrição (opcional)",
+    descriptionPlaceholder: "Ex: Controle financeiro da minha empresa...",
+    creating: "Criando carteira...",
+    successCreated: "Carteira criada com sucesso!",
+    errorCreated:
+      "Erro ao criar carteira. Verifique se a tabela 'wallets' foi criada no Supabase.",
+    errorFillName: "Por favor, informe o nome da carteira.",
+    tableMissingWarning:
+      "Tabela 'wallets' não encontrada no Supabase. Execute o script SQL para criá-la.",
+    switchWallet: "Alternar carteira",
   },
   auth: {
     loginTitle: "Entrar",
@@ -86,10 +118,12 @@ export const pt = {
     repeatPasswordLabel: "Confirmar Senha",
     forgotPassword: "Esqueceu sua senha?",
     forgotPasswordTitle: "Redefinir sua senha",
-    forgotPasswordDescription: "Digite seu e-mail e enviaremos um link para você redefinir sua senha",
+    forgotPasswordDescription:
+      "Digite seu e-mail e enviaremos um link para você redefinir sua senha",
     checkEmailTitle: "Verifique seu e-mail",
     checkEmailDescription: "Instruções de redefinição de senha enviadas",
-    checkEmailMessage: "Se você se cadastrou usando seu e-mail e senha, você receberá um e-mail de redefinição de senha.",
+    checkEmailMessage:
+      "Se você se cadastrou usando seu e-mail e senha, você receberá um e-mail de redefinição de senha.",
     sendResetEmail: "Enviar e-mail de redefinição",
     sending: "Enviando...",
     resetPasswordTitle: "Redefinir sua senha",

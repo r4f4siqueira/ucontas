@@ -10,6 +10,8 @@ import { HomeButton } from "@/components/home-button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { LanguageSwitcher } from "@/components/language-switcher";
 import { LanguageProvider } from "@/lib/i18n/context";
+import { WalletProvider } from "@/lib/wallets/context";
+import { WalletSwitcher } from "@/components/wallet-switcher";
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
@@ -18,7 +20,7 @@ const defaultUrl = process.env.VERCEL_URL
 export const metadata: Metadata = {
   metadataBase: new URL(defaultUrl),
   title: "UContas",
-  description: "Gerenciamento de finanças pessoais",
+  description: "Gerenciamento de finanças pessoais e empresariais",
   icons: {
     icon: "/letra-u.png",
   },
@@ -45,25 +47,28 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <LanguageProvider>
-            <main className="min-h-screen flex flex-col items-center">
-              <div className="flex-1 w-full flex flex-col items-center ">
-                <nav className="w-full flex justify-between border-b border-b-foreground/10 h-16 items-center">
-                  <HomeButton />
-                  <div className="w-full max-w-5xl flex justify-end p-0 px-0 md:p-3 md:px-5 text-sm gap-2">
-                    {!hasEnvVars ? (
-                      <EnvVarWarning />
-                    ) : (
-                      <Suspense>
-                        <AuthButton />
-                      </Suspense>
-                    )}
-                    <LanguageSwitcher />
-                    <ThemeSwitcher />
-                  </div>
-                </nav>
-                <div className="w-full  p-5 ">{children}</div>
-              </div>
-            </main>
+            <WalletProvider>
+              <main className="min-h-screen flex flex-col items-center">
+                <div className="flex-1 w-full flex flex-col items-center ">
+                  <nav className="w-full flex justify-between border-b border-b-foreground/10 h-16 items-center px-2 sm:px-4">
+                    <HomeButton />
+                    <div className="flex items-center p-0 px-0 md:p-3 md:px-5 text-sm gap-2">
+                      <WalletSwitcher />
+                      {!hasEnvVars ? (
+                        <EnvVarWarning />
+                      ) : (
+                        <Suspense>
+                          <AuthButton />
+                        </Suspense>
+                      )}
+                      <LanguageSwitcher />
+                      <ThemeSwitcher />
+                    </div>
+                  </nav>
+                  <div className="w-full p-4 sm:p-6">{children}</div>
+                </div>
+              </main>
+            </WalletProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

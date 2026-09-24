@@ -17,12 +17,13 @@ export const en: Dictionary = {
     dashboard: "Dashboard",
     signIn: "Sign in",
     signUp: "Sign up",
-    logout: "Logout",
+    logout: "Exit",
     hey: "Hey",
   },
   home: {
     title: "Manage your finances simply and smartly",
-    subtitle: "UContas helps you organize expenses, plan your financial future, and have total control over your money.",
+    subtitle:
+      "UContas helps you organize expenses, plan your financial future, and have total control over your money.",
     getStarted: "Get started",
     learnMore: "Learn more",
     features: {
@@ -32,27 +33,31 @@ export const en: Dictionary = {
       reports: "Clear Reports",
       reportsDesc: "View intuitive charts about your financial habits.",
       security: "Top Security",
-      securityDesc: "Your data protected with encryption and modern authentication.",
+      securityDesc:
+        "Your data protected with encryption and modern authentication.",
     },
   },
   dashboard: {
     title: "Dashboard",
     welcome: "Welcome to your financial dashboard",
-    protectedMessage: "This is a dashboard page that you can only see as an authenticated user",
+    protectedMessage:
+      "This is a dashboard page that you can only see as an authenticated user",
     overview: "Overview",
     totalBalance: "Total Balance",
     income: "Income",
     expenses: "Expenses",
     recentTransactions: "Recent Transactions",
     noTransactions: "No transactions registered yet.",
-    noTransactionsDesc: "Add your first income or expense using the buttons above.",
+    noTransactionsDesc:
+      "Add your first income or expense using the buttons above.",
     newIncome: "New Income",
     newExpense: "New Expense",
     addIncome: "Add Income",
     addExpense: "Add Expense",
     modalIncomeTitle: "Add Income",
     modalExpenseTitle: "Add Expense",
-    modalIncomeSubtitle: "Fill in the details of the income received or receivable.",
+    modalIncomeSubtitle:
+      "Fill in the details of the income received or receivable.",
     modalExpenseSubtitle: "Fill in the details of the expense or bill to pay.",
     typeLabel: "Transaction Type",
     titleLabel: "Title",
@@ -72,10 +77,36 @@ export const en: Dictionary = {
     successExpense: "Expense registered successfully!",
     successDelete: "Transaction deleted successfully!",
     errorFillRequired: "Please fill in the title and a valid amount.",
-    errorSaving: "Error saving transaction. Check if table was created in Supabase.",
+    errorSaving:
+      "Error saving transaction. Check if table was created in Supabase.",
     errorDeleting: "Error deleting transaction.",
-    tableMissingWarning: "Table 'transactions' not found in Supabase. Run the SQL script to create it.",
+    tableMissingWarning:
+      "Table 'transactions' not found in Supabase. Run the SQL script to create it.",
     deleteConfirm: "Are you sure you want to delete this transaction?",
+  },
+  wallets: {
+    title: "Wallets",
+    myWallets: "My Wallets",
+    selectWallet: "Select Wallet",
+    currentWallet: "Current Wallet",
+    newWallet: "New Wallet",
+    createWallet: "Create Wallet",
+    createFirstWallet: "Create My First Wallet",
+    noWalletsTitle: "You don't have any wallets yet",
+    noWalletsDesc:
+      "Create your first wallet (e.g. 'Personal' or 'Business') to start managing your income and expenses in an organized way.",
+    nameLabel: "Wallet Name",
+    namePlaceholder: "E.g. Personal, Company ABC, Investments...",
+    descriptionLabel: "Description (optional)",
+    descriptionPlaceholder: "E.g. Financial management for my company...",
+    creating: "Creating wallet...",
+    successCreated: "Wallet created successfully!",
+    errorCreated:
+      "Error creating wallet. Check if 'wallets' table was created in Supabase.",
+    errorFillName: "Please provide a wallet name.",
+    tableMissingWarning:
+      "Table 'wallets' not found in Supabase. Run the SQL script to create it.",
+    switchWallet: "Switch wallet",
   },
   auth: {
     loginTitle: "Login",
@@ -88,10 +119,12 @@ export const en: Dictionary = {
     repeatPasswordLabel: "Repeat Password",
     forgotPassword: "Forgot your password?",
     forgotPasswordTitle: "Reset Your Password",
-    forgotPasswordDescription: "Type in your email and we'll send you a link to reset your password",
+    forgotPasswordDescription:
+      "Type in your email and we'll send you a link to reset your password",
     checkEmailTitle: "Check Your Email",
     checkEmailDescription: "Password reset instructions sent",
-    checkEmailMessage: "If you registered using your email and password, you will receive a password reset email.",
+    checkEmailMessage:
+      "If you registered using your email and password, you will receive a password reset email.",
     sendResetEmail: "Send reset email",
     sending: "Sending...",
     resetPasswordTitle: "Reset Your Password",

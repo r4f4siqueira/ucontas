@@ -8,11 +8,13 @@ import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/lib/i18n/context";
 import { createClient } from "@/lib/supabase/client";
 import { TransactionType } from "@/lib/types/transaction";
+import { useWallet } from "@/lib/wallets/context";
 
 interface TransactionDialogProps {
   isOpen: boolean;
   onClose: () => void;
   defaultType?: TransactionType;
+  walletId?: string;
   onSuccess?: () => void;
 }
 
@@ -20,9 +22,11 @@ export function TransactionDialog({
   isOpen,
   onClose,
   defaultType = "income",
+  walletId,
   onSuccess,
 }: TransactionDialogProps) {
   const { text } = useLanguage();
+  const { currentWallet } = useWallet();
   const [type, setType] = useState<TransactionType>(defaultType);
   const [title, setTitle] = useState("");
   const [amount, setAmount] = useState("");
@@ -138,8 +142,11 @@ export function TransactionDialog({
 
       const transactionDate = date.trim() ? date : getTodayDate();
 
+      const activeWalletId = walletId || currentWallet?.id || null;
+
       const { error } = await supabase.from("transactions").insert({
         user_id: user.id,
+        wallet_id: activeWalletId,
         title: title.trim(),
         amount: numericAmount,
         type,

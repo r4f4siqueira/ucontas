@@ -5,15 +5,17 @@ import {
   TrendingUp,
   TrendingDown,
   Plus,
-  Wallet,
+  Wallet as WalletIcon,
   Trash2,
   Calendar,
   AlertCircle,
   Loader2,
   ArrowUpRight,
   ArrowDownRight,
+  FolderPlus,
 } from "lucide-react";
 import { useLanguage } from "@/lib/i18n/context";
+import { useWallet } from "@/lib/wallets/context";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { createClient } from "@/lib/supabase/client";
@@ -22,8 +24,16 @@ import { TransactionDialog } from "@/components/transaction-dialog";
 
 export default function DashboardPage() {
   const { text, language } = useLanguage();
+  const {
+    wallets,
+    currentWallet,
+    isLoading: isWalletsLoading,
+    tableMissing: isWalletsTableMissing,
+    openCreateWalletModal,
+  } = useWallet();
+
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoadingTransactions, setIsLoadingTransactions] = useState(true);
   const [tableMissing, setTableMissing] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [dialogType, setDialogType] = useState<TransactionType>("income");
@@ -44,17 +54,23 @@ export default function DashboardPage() {
     }
   }, [toastMessage]);
 
-  // Fetch transactions from Supabase
+  // Fetch transactions from Supabase for current wallet
   const fetchTransactions = useCallback(async () => {
+    if (!currentWallet) {
+      setTransactions([]);
+      setIsLoadingTransactions(false);
+      return;
+    }
+
     try {
-      setIsLoading(true);
+      setIsLoadingTransactions(true);
       const supabase = createClient();
       const {
         data: { user },
       } = await supabase.auth.getUser();
 
       if (!user) {
-        setIsLoading(false);
+        setIsLoadingTransactions(false);
         return;
       }
 
@@ -62,6 +78,7 @@ export default function DashboardPage() {
         .from("transactions")
         .select("*")
         .eq("user_id", user.id)
+        .eq("wallet_id", currentWallet.id)
         .order("date", { ascending: false })
         .order("created_at", { ascending: false });
 
@@ -70,7 +87,8 @@ export default function DashboardPage() {
         if (
           error.code === "42P01" ||
           error.message.includes("relation") ||
-          error.message.includes("transactions")
+          error.message.includes("transactions") ||
+          error.message.includes("wallet_id")
         ) {
           setTableMissing(true);
         }
@@ -82,9 +100,9 @@ export default function DashboardPage() {
     } catch (err) {
       console.error("Fetch transactions catch:", err);
     } finally {
-      setIsLoading(false);
+      setIsLoadingTransactions(false);
     }
-  }, []);
+  }, [currentWallet]);
 
   useEffect(() => {
     fetchTransactions();
@@ -181,6 +199,62 @@ export default function DashboardPage() {
     return true;
   });
 
+  // If wallets are loading
+  if (isWalletsLoading) {
+    return (
+      <div className="flex-1 w-full flex flex-col items-center justify-center min-h-[50vh] gap-3">
+        <Loader2 className="h-8 w-8 animate-spin text-primary" />
+        <p className="text-sm text-muted-foreground">{text.common.loading}</p>
+      </div>
+    );
+  }
+
+  // If user has no wallets yet
+  if (wallets.length === 0) {
+    return (
+      <div className="flex-1 w-full flex flex-col items-center justify-center max-w-xl mx-auto py-12 px-4">
+        {/* Table Warning if needed */}
+        {(tableMissing || isWalletsTableMissing) && (
+          <div className="w-full mb-6 bg-amber-500/10 border border-amber-500/30 text-amber-900 dark:text-amber-200 text-sm p-4 px-5 rounded-xl flex items-start gap-3">
+            <AlertCircle size="20" className="text-amber-600 dark:text-amber-400 shrink-0 mt-0.5" />
+            <div>
+              <p className="font-semibold">{text.wallets.tableMissingWarning}</p>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                Execute o script de migração no Supabase SQL Editor.
+              </p>
+            </div>
+          </div>
+        )}
+
+        <div className="w-full text-center p-8 sm:p-10 rounded-2xl border bg-card text-card-foreground shadow-lg space-y-6">
+          <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary">
+            <WalletIcon size={32} />
+          </div>
+
+          <div className="space-y-2">
+            <h1 className="text-2xl font-bold tracking-tight">
+              {text.wallets.noWalletsTitle}
+            </h1>
+            <p className="text-sm text-muted-foreground leading-relaxed">
+              {text.wallets.noWalletsDesc}
+            </p>
+          </div>
+
+          <div className="pt-2">
+            <Button
+              onClick={openCreateWalletModal}
+              size="lg"
+              className="h-11 px-6 font-semibold shadow-md transition-all hover:scale-[1.02] active:scale-[0.98] gap-2"
+            >
+              <FolderPlus size={18} />
+              <span>{text.wallets.createFirstWallet}</span>
+            </Button>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 w-full flex flex-col gap-6 max-w-5xl mx-auto py-6">
       {/* Toast Notification */}
@@ -209,7 +283,7 @@ export default function DashboardPage() {
                 {text.dashboard.tableMissingWarning}
               </p>
               <p className="text-xs text-muted-foreground mt-0.5">
-                Execute o script de criação da tabela &apos;transactions&apos;
+                Execute o script de criação das tabelas &apos;wallets&apos; e &apos;transactions&apos;
                 no Supabase SQL Editor.
               </p>
             </div>
@@ -228,10 +302,23 @@ export default function DashboardPage() {
       {/* Dashboard Top Header & Action Buttons */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <h1 className="text-3xl font-bold tracking-tight">
-            {text.dashboard.title}
-          </h1>
-          <p className="text-muted-foreground">{text.dashboard.welcome}</p>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <h1 className="text-3xl font-bold tracking-tight">
+              {text.dashboard.title}
+            </h1>
+            {currentWallet && (
+              <Badge
+                variant="secondary"
+                className="text-xs font-semibold px-2.5 py-0.5 bg-primary/10 text-primary border border-primary/20 flex items-center gap-1.5"
+              >
+                <WalletIcon size={12} />
+                <span>{currentWallet.name}</span>
+              </Badge>
+            )}
+          </div>
+          <p className="text-muted-foreground">
+            {currentWallet?.description || text.dashboard.welcome}
+          </p>
         </div>
 
         {/* 2 Main Action Buttons: Cadastrar Receita & Adicionar Despesa */}
@@ -263,7 +350,7 @@ export default function DashboardPage() {
               {text.dashboard.totalBalance}
             </p>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <Wallet size={18} />
+              <WalletIcon size={18} />
             </div>
           </div>
           <p
@@ -275,7 +362,7 @@ export default function DashboardPage() {
                   : "text-foreground"
             }`}
           >
-            {isLoading ? "..." : formatCurrency(totalBalance)}
+            {isLoadingTransactions ? "..." : formatCurrency(totalBalance)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             {totalBalance >= 0 ? "Saldo positivo" : "Saldo negativo"}
@@ -293,7 +380,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <p className="text-2xl font-bold text-emerald-600 dark:text-emerald-400 mt-3 tracking-tight">
-            {isLoading ? "..." : formatCurrency(totalIncome)}
+            {isLoadingTransactions ? "..." : formatCurrency(totalIncome)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             {transactions.filter((t) => t.type === "income").length}{" "}
@@ -312,7 +399,7 @@ export default function DashboardPage() {
             </div>
           </div>
           <p className="text-2xl font-bold text-rose-600 dark:text-rose-400 mt-3 tracking-tight">
-            {isLoading ? "..." : formatCurrency(totalExpenses)}
+            {isLoadingTransactions ? "..." : formatCurrency(totalExpenses)}
           </p>
           <p className="text-xs text-muted-foreground mt-1">
             {transactions.filter((t) => t.type === "expense").length}{" "}
@@ -329,7 +416,7 @@ export default function DashboardPage() {
               {text.dashboard.recentTransactions}
             </h2>
             <p className="text-xs text-muted-foreground mt-0.5">
-              Histórico de movimentações financeiras
+              Histórico de lançamentos em {currentWallet?.name || "esta carteira"}
             </p>
           </div>
 
@@ -369,7 +456,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Transactions List Content */}
-        {isLoading ? (
+        {isLoadingTransactions ? (
           <div className="flex flex-col items-center justify-center py-12 text-muted-foreground gap-3">
             <Loader2 className="h-7 w-7 animate-spin text-primary" />
             <p className="text-sm">{text.common.loading}</p>
@@ -504,6 +591,7 @@ export default function DashboardPage() {
         isOpen={isDialogOpen}
         onClose={() => setIsDialogOpen(false)}
         defaultType={dialogType}
+        walletId={currentWallet?.id}
         onSuccess={() => {
           fetchTransactions();
           setToastMessage({
