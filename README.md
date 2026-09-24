@@ -1,15 +1,16 @@
 # UContas
 
-Aplicativo de gerenciamento de finanças pessoais desenvolvido com Next.js, TypeScript e Supabase.
+Aplicativo de gerenciamento de finanças pessoais e empresariais desenvolvido com Next.js, TypeScript e Supabase.
 
 ## Funcionalidades
 
 - [x] Autenticação com Supabase
-- [ ] Gerenciamento de receitas e despesas
+- [x] Gerenciamento de receitas e despesas
 - [ ] Categorias de receitas e despesas
 - [ ] Gráficos de receitas e despesas
-- [ ] Histórico de transações
+- [x] Histórico de transações
 - [ ] Dashboard
+- [ ] Multi carteiras (Gerencie contas Pessoais e Empresariais)
 
 ## Clone e execute localmente
 
