@@ -32,31 +32,37 @@ export default function HomePage() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full pt-8 text-left">
-        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2">
+        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2 hover:border-blue-500 hover:ring-1 hover:ring-blue-500 transition-colors">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3">
             <Wallet size={20} />
           </div>
-          <h3 className="font-semibold text-lg">{text.home.features.expenses}</h3>
+          <h3 className="font-semibold text-lg">
+            {text.home.features.expenses}
+          </h3>
           <p className="text-sm text-muted-foreground">
             {text.home.features.expensesDesc}
           </p>
         </div>
 
-        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2">
+        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2 hover:border-blue-500 hover:ring-1 hover:ring-blue-500 transition-colors">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3">
             <PieChart size={20} />
           </div>
-          <h3 className="font-semibold text-lg">{text.home.features.reports}</h3>
+          <h3 className="font-semibold text-lg">
+            {text.home.features.reports}
+          </h3>
           <p className="text-sm text-muted-foreground">
             {text.home.features.reportsDesc}
           </p>
         </div>
 
-        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2">
+        <div className="p-6 rounded-xl border bg-card text-card-foreground shadow-sm space-y-2 hover:border-blue-500 hover:ring-1 hover:ring-blue-500 transition-colors">
           <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center text-primary mb-3">
             <ShieldCheck size={20} />
           </div>
-          <h3 className="font-semibold text-lg">{text.home.features.security}</h3>
+          <h3 className="font-semibold text-lg">
+            {text.home.features.security}
+          </h3>
           <p className="text-sm text-muted-foreground">
             {text.home.features.securityDesc}
           </p>
