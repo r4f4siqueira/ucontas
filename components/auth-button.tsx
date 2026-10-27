@@ -17,7 +17,7 @@ export function AuthButton() {
     const supabase = createClient();
 
     // 1. Obter usuário inicial
-    supabase.auth.getUser().then(({ data: { user } }) => {
+    void supabase.auth.getUser().then(({ data: { user } }) => {
       setUser(user);
       setLoading(false);
     });

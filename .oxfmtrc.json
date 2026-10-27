@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/oxfmt/configuration_schema.json",
+  "tabWidth": 2,
+  "useTabs": false,
+  "semi": true,
+  "singleQuote": false,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "sortTailwindcss": {
+    "functions": ["cn", "cva", "clsx"]
+  },
+  "ignorePatterns": [
+    ".next/**",
+    "node_modules/**",
+    ".agents/**",
+    "dist/**",
+    "build/**"
+  ]
+}
